@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-core-xunit", "dotnet-core-xunit\dotnet-core-xunit.csproj", "{2E3BB7AC-81E2-4003-AE9D-9BB7569F7D52}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-core-xunit-test", "..\dotnet-core-xunit-test\dotnet-core-xunit-test.csproj", "{9B9C6FA2-76F7-48F0-881D-DA93A83FA8CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dotnet-core-xunit-test", "dotnet-core-xunit-test\dotnet-core-xunit-test.csproj", "{9B9C6FA2-76F7-48F0-881D-DA93A83FA8CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
