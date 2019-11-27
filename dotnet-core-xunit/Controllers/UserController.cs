@@ -26,9 +26,9 @@ namespace dotnet_core_xunit.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IActionResult Get()
         {
-            return new string[] { "dotnet-core-xunit-example", $"v{GetType().Assembly.GetName().Version.ToString()}", };
+            return Ok(new string[] { "dotnet-core-xunit-example", $"v{GetType().Assembly.GetName().Version.ToString()}", });
         }
 
 
