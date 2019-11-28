@@ -1,8 +1,6 @@
 ﻿using dotnet_core_xunit.Entities.TestDb;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace dotnet_core_xunit_test.Mock.Entities
 {
@@ -17,7 +15,7 @@ namespace dotnet_core_xunit_test.Mock.Entities
              */
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseInMemoryDatabase(databaseName: "corexunitmock");
+                optionsBuilder.UseInMemoryDatabase(Guid.NewGuid().ToString());
             }
         }
     }
