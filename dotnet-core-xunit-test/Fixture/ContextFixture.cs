@@ -35,6 +35,7 @@ namespace dotnet_core_xunit_test.Fixture
                   Status = 1,
                 }
             });
+            testDbContextMock.SaveChanges();
         }
 
         // https://docs.microsoft.com/en-us/visualstudio/code-quality/ca1063?view=vs-2019
