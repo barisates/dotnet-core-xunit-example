@@ -47,6 +47,8 @@ namespace dotnet_core_xunit_test.Fixture
                 }
             });
 
+            testDbContextMock.SaveChanges();
+            
             #endregion
 
             #region Mapper settings with original profiles.
