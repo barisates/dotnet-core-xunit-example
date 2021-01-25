@@ -33,7 +33,7 @@ namespace dotnet_core_xunit_test.Fixture
                   Password = "jmctby",
                   FullName = "mq8zp2",
                   CreateDate = DateTime.Now,
-                  Status = 1,
+                  Status = true,
                 },
                 // for get test
                 new dotnet_core_xunit.Entities.TestDb.Users()
@@ -43,7 +43,7 @@ namespace dotnet_core_xunit_test.Fixture
                   Password = "al9jje",
                   FullName = "jqvlv2",
                   CreateDate = DateTime.Now,
-                  Status = 1,
+                  Status = true,
                 }
             });
 

@@ -1,16 +1,11 @@
-﻿using System.IO.Compression;
-using AutoMapper;
-using dotnet_core_xunit.Dtos;
+﻿using AutoMapper;
 using dotnet_core_xunit.Entities.TestDb;
 using dotnet_core_xunit.Helpers;
 using dotnet_core_xunit.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json;
 
 namespace dotnet_core_xunit
 {
@@ -26,12 +21,6 @@ namespace dotnet_core_xunit
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Cross-Origin Resource Sharing 
-            services.AddCors();
-
-            // Configure Compression level
-            services.Configure<GzipCompressionProviderOptions>(options => options.Level = CompressionLevel.Fastest);
-
             // Auto Mapper Configurations
             var mappingConfig = new MapperConfiguration(mc =>
             {
@@ -40,25 +29,11 @@ namespace dotnet_core_xunit
 
             IMapper mapper = mappingConfig.CreateMapper();
             services.AddSingleton(mapper);
-
-            // Add Response compression services
-            services.AddResponseCompression(options =>
-            {
-                options.Providers.Add<GzipCompressionProvider>();
-                options.EnableForHttps = true;
-            });
-
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2).AddJsonOptions(options =>
-            {
-                options.SerializerSettings.DateFormatString = "dd.MM.yyyy HH:mm:ss";
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            });
-
-            // DB Context
             services.AddDbContext<TestDbContext>();
 
-            // Application middleware
-            services.AddScoped<IUserService, UserService>();
+            services.AddTransient<IUserService, UserService>();
+
+            services.AddControllers();
 
         }
 
@@ -71,19 +46,33 @@ namespace dotnet_core_xunit
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                app.UseExceptionHandler("/Home/Error");
             }
 
+            app.UseStaticFiles();
+
             app.UseCors(x => x
-            .AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials());
+               .AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
+
+            app.UseForwardedHeaders();
+            app.UseHsts();
 
             app.UseHttpsRedirection();
+
             app.UseAuthentication();
-            app.UseMvc();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            app.SeedData();
         }
     }
 }
