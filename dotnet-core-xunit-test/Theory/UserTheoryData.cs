@@ -21,7 +21,7 @@ namespace dotnet_core_xunit_test.Theory
                 Id = 210544,
                 Password = "d87btl",
                 LastLogin = DateTime.Now,
-                Status = 1,
+                Status = true,
             });
         }
     }

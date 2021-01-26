@@ -12,7 +12,7 @@ namespace dotnet_core_xunit.Dtos
             public string FullName { get; set; }
             public DateTime LastLogin { get; set; }
             public DateTime CreateDate { get; set; }
-            public byte Status { get; set; }
+            public bool Status { get; set; }
         }
 
     }
